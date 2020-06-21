@@ -39,8 +39,8 @@ export class Map {
         this.loading = true;
         var map = Maps[mapName];
         this.scale = map.scale;
-        var mapJson = await loadJSON(`../maps/${map.map}`);
-        this.spriteSheet = await loadImage(`../images/${map.tileMap}`);
+        var mapJson = await loadJSON(`maps/${map.map}`);
+        this.spriteSheet = await loadImage(`images/${map.tileMap}`);
         this.mapWidth = mapJson.width * Game.gridCellSize;
         this.mapHeight = mapJson.height * Game.gridCellSize;
 
@@ -86,14 +86,14 @@ export class Map {
 
             switch (object.type) {
                 case 'player':
-                    var playerSprite = await loadImage(`../images/${object.properties[0].value}.png`);
+                    var playerSprite = await loadImage(`images/${object.properties[0].value}.png`);
                     var player = new Player(object.x, object.y, new EntitySprite(playerSprite, { pattern: [1, 0, 2, 0], index: 0 }));
                     this.player = player;
 
                     break;
                 case 'npc':
                     var npc = object.properties[0].value;
-                    var npcSprite = await loadImage(`../images/${npc}.png`);
+                    var npcSprite = await loadImage(`images/${npc}.png`);
                     if (npc == "n001") {
                         this.npcs.push(new n001(object.x, object.y, new EntitySprite(npcSprite, { pattern: [1, 0, 2, 0], index: 0 }), Game.DOWN));
                     }
@@ -121,7 +121,7 @@ export class Map {
                     break;
 
                     case 'item':
-                        var itemSprite = await loadImage(`../images/${object.properties[1].value}.png`);
+                        var itemSprite = await loadImage(`images/${object.properties[1].value}.png`);
                         this.items.push({
                             sprite: itemSprite,
                             x: object.x, 
